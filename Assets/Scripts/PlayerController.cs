@@ -11,6 +11,12 @@ public class PlayerController : MonoBehaviour
     private bool _isOnGround;
     private Rigidbody _playerRb;
     
+    // Define the boundaries (in world units).
+    private const float MinX = -25f;
+    private const float MaxX = 25f;
+    private const float MinZ = -25f;
+    private const float MaxZ = 25f;
+    
     // Start is called before the first frame update.
     private void Start()
     {
@@ -26,6 +32,7 @@ public class PlayerController : MonoBehaviour
         _horizontalInput = Input.GetAxis("Horizontal");
         _verticalInput = Input.GetAxis("Vertical");
 
+        // Executes the jump method when space is pressed and the player is on the ground.
         if (Input.GetKeyDown(KeyCode.Space) && _isOnGround)
         {
             Jump();
@@ -38,8 +45,15 @@ public class PlayerController : MonoBehaviour
         // Calculates the movement direction.
         var movement = new Vector3(_horizontalInput, 0.0f, _verticalInput);
 
-        // Moves the player around smoothly.
-        _playerRb.MovePosition(transform.position + movement * (Speed * Time.fixedDeltaTime));
+        // Calculates new position.
+        var newPosition = transform.position + movement * (Speed * Time.fixedDeltaTime);
+
+        // Keeps the newPosition values inside the set min and max bounds.
+        newPosition.x = Mathf.Clamp(newPosition.x, MinX, MaxX);
+        newPosition.z = Mathf.Clamp(newPosition.z, MinZ, MaxZ);
+
+        // Moves the player around smoothly within the boundaries.
+        _playerRb.MovePosition(newPosition);
     }
 
     // Method that executes the jump logic.
