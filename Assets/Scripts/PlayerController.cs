@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     private const float Speed = 5.0f;
     private const float JumpForce = 10.0f;
     private const float GravityModifier = 2.0f;
-    private const float MouseSensitivity = 250.0f;
+    private const float MouseSensitivity = 600.0f;
     
     private float _horizontalInput;
     private float _verticalInput;
