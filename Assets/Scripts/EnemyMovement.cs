@@ -2,24 +2,32 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    // Declaring and initializing variables.
     private GameObject _player;
     public float speed = 3.0f;
+    private bool _isFollowing = false;
 
+    // Start is called before the first frame update.
     private void Start()
     {
         _player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     private void Update()
     {
-        // Calculate the distance between the enemy and the player
+        // Calculates the distance between the enemy and the player.
         var distanceToPlayer = Vector3.Distance(transform.position, _player.transform.position);
 
-        // Check if the player is within 10 units range
+        // Checks if the player is within 10 units range.
         if (distanceToPlayer <= 10f)
         {
-            // Move towards the player's position
+            _isFollowing = true;
+        }
+        
+        // Checks if the enemy is following the player.
+        if (_isFollowing)
+        {
             MoveTowardsPlayer();
         }
     }
