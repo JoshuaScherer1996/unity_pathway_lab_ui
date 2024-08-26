@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
         // Applies the GravityModifier to the games general physics.
         Physics.gravity *= GravityModifier;
         
-        // Hides and locks the cursor in the game window.
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame.
