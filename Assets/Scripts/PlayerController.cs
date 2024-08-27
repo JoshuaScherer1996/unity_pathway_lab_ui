@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Declaring and initializing variables.
+    // Declaring and initializing the variables and constants.
     private const float Speed = 5.0f;
     private const float JumpForce = 10.0f;
     private const float GravityModifier = 2.0f;
