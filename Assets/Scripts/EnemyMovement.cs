@@ -88,4 +88,14 @@ public class EnemyMovement : MonoBehaviour
         var direction = (_player.transform.position - transform.position).normalized;
         transform.position += direction * (speed * Time.deltaTime);
     }
+    
+    // Destroys both the player and the enemy if they collide.
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
