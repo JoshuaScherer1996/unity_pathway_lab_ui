@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private const float MaxX = 25f;
     private const float MinZ = -25f;
     private const float MaxZ = 25f;
+
+    public GameObject projectile;
     
     // Start is called before the first frame update.
     private void Start()
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
         // Applies the GravityModifier to the games general physics.
         Physics.gravity *= GravityModifier;
+        
+        
         
     }
 
@@ -51,6 +55,10 @@ public class PlayerController : MonoBehaviour
         }
         
         //ToDo: On left mouse click instantiate a projectile
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Instantiate(projectile);
+        }
     }
 
     // Called at a fixed interval and is preferred for physics-based updates.
