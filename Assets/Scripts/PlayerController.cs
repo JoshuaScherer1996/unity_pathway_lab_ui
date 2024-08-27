@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private const float MaxZ = 25f;
 
     public GameObject projectile;
+    private const float SpawnDistance = 2.0f;
     
     // Start is called before the first frame update.
     private void Start()
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
         //ToDo: On left mouse click instantiate a projectile
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Instantiate(projectile);
+            ShootProjectile();
         }
     }
 
@@ -92,5 +93,17 @@ public class PlayerController : MonoBehaviour
         {
             _isOnGround = true;
         }
+    }
+    
+    // Implements the shooting logic.
+    private void ShootProjectile()
+    {
+        // Instantiates the projectile 2f in front of the player based on the direction they are facing.
+        var spawnPosition = transform.position + transform.forward * SpawnDistance;
+        var spawnedProjectile = Instantiate(projectile, spawnPosition, transform.rotation);
+
+        // Sets the direction of the projectile to match the player's direction.
+        var projectileScript = spawnedProjectile.GetComponent<ProjectileBehaviour>();
+        projectileScript.SetDirection(transform.forward);
     }
 }
