@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+        
+        //ToDo: On left mouse click instantiate a projectile
     }
 
     // Called at a fixed interval and is preferred for physics-based updates.
