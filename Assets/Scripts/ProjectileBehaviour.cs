@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    // Declaring and initializing the variables and constants.
     private const float Speed = 20.0f;
     private Vector3 _direction;
 
@@ -14,7 +16,7 @@ public class ProjectileBehaviour : MonoBehaviour
     public void SetDirection(Vector3 direction)
     {
         // Normalizes the direction.
-        _direction = direction.normalized; 
+        _direction = direction.normalized;
     }
 
     // Update is called once per frame.
@@ -24,9 +26,19 @@ public class ProjectileBehaviour : MonoBehaviour
         transform.position += _direction * (Speed * Time.deltaTime);
 
         // Destroys the projectile if it goes out of bounds.
-        if (transform.position.x < MinX || transform.position.x > MaxX || 
+        if (transform.position.x < MinX || transform.position.x > MaxX ||
             transform.position.z < MinZ || transform.position.z > MaxZ)
         {
+            Destroy(gameObject);
+        }
+    }
+
+    // Destroys both projectile and enemy of they collide.
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
