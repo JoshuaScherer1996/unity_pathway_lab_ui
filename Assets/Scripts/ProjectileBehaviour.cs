@@ -20,8 +20,8 @@ public class ProjectileBehaviour : MonoBehaviour
         transform.position += _direction * (Speed * Time.deltaTime);
 
         // Destroys the projectile if it goes out of bounds.
-        if (transform.position.x < SpawnManager.MinX || transform.position.x > SpawnManager.MaxX ||
-            transform.position.z < SpawnManager.MinZ || transform.position.z > SpawnManager.MaxZ)
+        if (transform.position.x < -SpawnManager.GlobalBound || transform.position.x > SpawnManager.GlobalBound ||
+            transform.position.z < -SpawnManager.GlobalBound || transform.position.z > SpawnManager.GlobalBound)
         {
             Destroy(gameObject);
         }

@@ -643,6 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca18835b072544ee8a0c2a784bf5a0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 1255931756613101082, guid: 5a25f190626c7494eaa3ff63867344f1, type: 3}
 --- !u!4 &1771430513
 Transform:
   m_ObjectHideFlags: 0
@@ -672,7 +673,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1255931756613101082, guid: 5a25f190626c7494eaa3ff63867344f1, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255931756613101082, guid: 5a25f190626c7494eaa3ff63867344f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8597862373644437510, guid: 5a25f190626c7494eaa3ff63867344f1, type: 3}
       propertyPath: m_LocalPosition.x

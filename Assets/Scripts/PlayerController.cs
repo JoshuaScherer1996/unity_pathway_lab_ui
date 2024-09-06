@@ -65,8 +65,8 @@ public class PlayerController : MonoBehaviour
         var newPosition = transform.position + movement * (Speed * Time.fixedDeltaTime);
 
         // Keeps the newPosition values inside the set min and max bounds.
-        newPosition.x = Mathf.Clamp(newPosition.x, SpawnManager.MinX, SpawnManager.MaxX);
-        newPosition.z = Mathf.Clamp(newPosition.z, SpawnManager.MinZ, SpawnManager.MaxZ);
+        newPosition.x = Mathf.Clamp(newPosition.x, -SpawnManager.GlobalBound, SpawnManager.GlobalBound);
+        newPosition.z = Mathf.Clamp(newPosition.z, -SpawnManager.GlobalBound, SpawnManager.GlobalBound);
 
         // Moves the player around smoothly within the boundaries.
         _playerRb.MovePosition(newPosition);

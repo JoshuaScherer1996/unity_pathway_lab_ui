@@ -45,8 +45,8 @@ public class EnemyMovement : MonoBehaviour
     private void ChooseNewPosition()
     {
         // Generates a random target position within the constrained field.
-        var newPosX = Mathf.Clamp(_startPosition.x + Random.Range(-5f, 5f), SpawnManager.MinX, SpawnManager.MaxX);
-        var newPosZ = Mathf.Clamp(_startPosition.z + Random.Range(-5f, 5f), SpawnManager.MinZ, SpawnManager.MaxZ);
+        var newPosX = Mathf.Clamp(_startPosition.x + Random.Range(-5f, 5f), -SpawnManager.GlobalBound, SpawnManager.GlobalBound);
+        var newPosZ = Mathf.Clamp(_startPosition.z + Random.Range(-5f, 5f), -SpawnManager.GlobalBound, SpawnManager.GlobalBound);
 
         // Sets the new target position with the new x and z values.
         _targetPosition = new Vector3(newPosX, transform.position.y, newPosZ);

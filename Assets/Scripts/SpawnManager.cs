@@ -3,20 +3,23 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     // Declaring and initializing the variables and constants.
-    public const float MinX = -25f;
-    public const float MaxX = 25f;
-    public const float MinZ = -25f;
-    public const float MaxZ = 25f;
+    public const float GlobalBound = 25f;
+    public GameObject enemyPrefab;
     
     // Start is called before the first frame update.
     private void Start()
     {
         
+        SpawnEnemy();
     }
 
-    // Update is called once per frame.
-    private void Update()
+    private void SpawnEnemy()
     {
+        var spawnRangeX = Random.Range(-GlobalBound, GlobalBound);
+        var spawnRangeZ = Random.Range(-GlobalBound, GlobalBound);
+
+        var randomPos = new Vector3(spawnRangeX, 0.54f, spawnRangeZ);
         
+        Instantiate(enemyPrefab, randomPos, enemyPrefab.transform.rotation);
     }
 }
