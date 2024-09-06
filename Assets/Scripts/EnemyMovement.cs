@@ -12,17 +12,13 @@ public class EnemyMovement : MonoBehaviour
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
 
-    private const float MinX = -25f;
-    private const float MaxX = 25f;
-    private const float MinZ = -25f;
-    private const float MaxZ = 25f;
-
     // Start is called before the first frame update.
     private void Start()
     {
         // Finds all relevant components needed at the start of the game.
         _player = GameObject.Find("Player");
         _startPosition = transform.position;
+        
         // Starts the coroutine for the patrolling logic.
         StartCoroutine(Patrol());
     }
@@ -39,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
             _isPatrolling = false;
         }
 
-        // Uses the following logic implemented in the MoveTowardsPlayer method.
+        // Uses the logic implemented in the MoveTowardsPlayer method.
         if (_isFollowing)
         {
             MoveTowardsPlayer();
@@ -49,8 +45,8 @@ public class EnemyMovement : MonoBehaviour
     private void ChooseNewPosition()
     {
         // Generates a random target position within the constrained field.
-        var newPosX = Mathf.Clamp(_startPosition.x + Random.Range(-5f, 5f), MinX, MaxX);
-        var newPosZ = Mathf.Clamp(_startPosition.z + Random.Range(-5f, 5f), MinZ, MaxZ);
+        var newPosX = Mathf.Clamp(_startPosition.x + Random.Range(-5f, 5f), SpawnManager.MinX, SpawnManager.MaxX);
+        var newPosZ = Mathf.Clamp(_startPosition.z + Random.Range(-5f, 5f), SpawnManager.MinZ, SpawnManager.MaxZ);
 
         // Sets the new target position with the new x and z values.
         _targetPosition = new Vector3(newPosX, transform.position.y, newPosZ);
@@ -77,7 +73,7 @@ public class EnemyMovement : MonoBehaviour
                 yield return null;
             }
 
-            // Pauses for 3 seconds before choosing the next patrol point.
+            // Pauses for 2 seconds before choosing the next patrol point.
             yield return new WaitForSeconds(2f);
         }
     }

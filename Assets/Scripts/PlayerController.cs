@@ -15,11 +15,6 @@ public class PlayerController : MonoBehaviour
     private bool _isOnGround;
     private Rigidbody _playerRb;
 
-    private const float MinX = -25f;
-    private const float MaxX = 25f;
-    private const float MinZ = -25f;
-    private const float MaxZ = 25f;
-
     public GameObject projectile;
     private const float SpawnDistance = 2.0f;
 
@@ -53,7 +48,7 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
-        //ToDo: On left mouse click instantiate a projectile
+        // Instantiates a projectile when the left mouse button is triggered.
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             ShootProjectile();
@@ -70,8 +65,8 @@ public class PlayerController : MonoBehaviour
         var newPosition = transform.position + movement * (Speed * Time.fixedDeltaTime);
 
         // Keeps the newPosition values inside the set min and max bounds.
-        newPosition.x = Mathf.Clamp(newPosition.x, MinX, MaxX);
-        newPosition.z = Mathf.Clamp(newPosition.z, MinZ, MaxZ);
+        newPosition.x = Mathf.Clamp(newPosition.x, SpawnManager.MinX, SpawnManager.MaxX);
+        newPosition.z = Mathf.Clamp(newPosition.z, SpawnManager.MinZ, SpawnManager.MaxZ);
 
         // Moves the player around smoothly within the boundaries.
         _playerRb.MovePosition(newPosition);

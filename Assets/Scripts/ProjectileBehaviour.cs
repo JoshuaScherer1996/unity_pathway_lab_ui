@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
@@ -6,11 +5,6 @@ public class ProjectileBehaviour : MonoBehaviour
     // Declaring and initializing the variables and constants.
     private const float Speed = 20.0f;
     private Vector3 _direction;
-
-    private const float MinX = -25f;
-    private const float MaxX = 25f;
-    private const float MinZ = -25f;
-    private const float MaxZ = 25f;
 
     // Sets the direction of the projectile.
     public void SetDirection(Vector3 direction)
@@ -26,8 +20,8 @@ public class ProjectileBehaviour : MonoBehaviour
         transform.position += _direction * (Speed * Time.deltaTime);
 
         // Destroys the projectile if it goes out of bounds.
-        if (transform.position.x < MinX || transform.position.x > MaxX ||
-            transform.position.z < MinZ || transform.position.z > MaxZ)
+        if (transform.position.x < SpawnManager.MinX || transform.position.x > SpawnManager.MaxX ||
+            transform.position.z < SpawnManager.MinZ || transform.position.z > SpawnManager.MaxZ)
         {
             Destroy(gameObject);
         }
