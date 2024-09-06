@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        // Starts the coroutine to spawn enemies in defined intervals. 
         StartCoroutine(SpawnInterval());
     }
 
@@ -27,6 +28,7 @@ public class SpawnManager : MonoBehaviour
         Instantiate(enemyPrefab, randomPos, enemyPrefab.transform.rotation);
     }
 
+    // Coroutine to repeatedly spawn enemies.
     private IEnumerator SpawnInterval()
     {
         while(!_gameOver)
