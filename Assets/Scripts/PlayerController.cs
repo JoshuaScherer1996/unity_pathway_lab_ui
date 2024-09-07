@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -16,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _playerRb;
 
     public GameObject projectile;
+    public GameObject teleportProjectile;
     private const float SpawnDistance = 2.0f;
 
     // Start is called before the first frame update.
@@ -51,7 +51,14 @@ public class PlayerController : MonoBehaviour
         // Instantiates a projectile when the left mouse button is triggered.
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            ShootProjectile();
+            ShootProjectile(false);
+        }
+
+        // Instantiates a teleport projectile when the left mouse button is triggered.
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            ShootProjectile(true);
+            // ToDo: update the player position based on the collisions position.
         }
     }
 
@@ -89,17 +96,31 @@ public class PlayerController : MonoBehaviour
     }
 
     // Implements the shooting logic.
-    private void ShootProjectile()
+    private void ShootProjectile(bool isTeleportProjectile)
     {
         // Gets the direction of the cinemachine camera.
         var cameraTransform = Camera.main.transform;
         var spawnPosition = transform.position + cameraTransform.forward * SpawnDistance;
-        
-        // Instantiates the projectile at the spawn position.
-        var spawnedProjectile = Instantiate(projectile, spawnPosition, cameraTransform.rotation);
-        
+
+        // Instantiates the projectile at the spawn position. Differentiates between the two possible projectiles.
+        var spawnedProjectile =
+            isTeleportProjectile ? 
+            Instantiate(teleportProjectile, spawnPosition, cameraTransform.rotation) : 
+            Instantiate(projectile, spawnPosition, cameraTransform.rotation);
+
+
         // Getting the ProjectileBehaviour script and using its SetDirection method.
         var projectileScript = spawnedProjectile.GetComponent<ProjectileBehaviour>();
         projectileScript.SetDirection(cameraTransform.forward);
     }
 }
+/*
+ * Teleport variable in projectile behaviour.
+ * on mouseclick 1 shoot projectile the same as the other one
+ *  Trigger shootprojectile
+ *  Differentiate between the two different kinds of projectile
+ *  if projectile is isTeleport
+ *      Destroy the object if it is tagged as enemy
+ *      Update player position to the position where the collision happened
+ *      Small delay in going there so that the player isn't there instantly
+ */

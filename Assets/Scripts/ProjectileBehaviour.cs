@@ -5,6 +5,7 @@ public class ProjectileBehaviour : MonoBehaviour
     // Declaring and initializing the variables and constants.
     private const float Speed = 20.0f;
     private Vector3 _direction;
+    public bool isTeleport;
 
     // Sets the direction of the projectile.
     public void SetDirection(Vector3 direction)
