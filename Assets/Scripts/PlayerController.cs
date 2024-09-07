@@ -91,12 +91,15 @@ public class PlayerController : MonoBehaviour
     // Implements the shooting logic.
     private void ShootProjectile()
     {
-        // Instantiates the projectile 2f in front of the player based on the direction they are facing.
-        var spawnPosition = transform.position + transform.forward * SpawnDistance;
-        var spawnedProjectile = Instantiate(projectile, spawnPosition, transform.rotation);
-
-        // Sets the direction of the projectile to match the player's direction.
+        // Gets the direction of the cinemachine camera.
+        var cameraTransform = Camera.main.transform;
+        var spawnPosition = transform.position + cameraTransform.forward * SpawnDistance;
+        
+        // Instantiates the projectile at the spawn position.
+        var spawnedProjectile = Instantiate(projectile, spawnPosition, cameraTransform.rotation);
+        
+        // Getting the ProjectileBehaviour script and using its SetDirection method.
         var projectileScript = spawnedProjectile.GetComponent<ProjectileBehaviour>();
-        projectileScript.SetDirection(transform.forward);
+        projectileScript.SetDirection(cameraTransform.forward);
     }
 }

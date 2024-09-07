@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
         while(!_gameOver)
         {
             SpawnEnemy();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(4f);
         }
     }
 }
