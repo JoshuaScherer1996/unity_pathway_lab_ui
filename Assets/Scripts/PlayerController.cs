@@ -15,8 +15,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _playerRb;
 
     public GameObject projectile;
-    public GameObject teleportProjectile;
     private const float SpawnDistance = 2.0f;
+    
+    public GameObject teleportProjectile;
+    private Vector3 _targetTeleportPosition;
+    private bool _shouldTeleport;
+    private const float TeleportSpeed = 200.0f;
 
     // Start is called before the first frame update.
     private void Start()
@@ -59,6 +63,12 @@ public class PlayerController : MonoBehaviour
         {
             ShootProjectile(true);
             // ToDo: update the player position based on the collisions position.
+        }
+        
+        // Handles the teleport movement
+        if (_shouldTeleport)
+        {
+            MoveTowardsTeleportPosition();
         }
     }
 
@@ -112,15 +122,33 @@ public class PlayerController : MonoBehaviour
         // Getting the ProjectileBehaviour script and using its SetDirection method.
         var projectileScript = spawnedProjectile.GetComponent<ProjectileBehaviour>();
         projectileScript.SetDirection(cameraTransform.forward);
+
+        projectileScript.isTeleport = isTeleportProjectile;
+    }
+    
+    // Initiates teleportation sequence.
+    public void InitiateTeleport(Vector3 teleportPosition)
+    {
+        // Uses raycasting to ensure the teleport point is above the ground.
+        if (Physics.Raycast(teleportPosition + Vector3.up * 50f, Vector3.down, out var hit, Mathf.Infinity))
+        {
+            _targetTeleportPosition = hit.point; // Adjust to ground level.
+            _shouldTeleport = true; // Start teleportation movement.
+        }
+    }
+
+    // Moves the player towards the teleport point.
+    private void MoveTowardsTeleportPosition()
+    {
+        var step = TeleportSpeed * Time.deltaTime;
+        var targetPosition = new Vector3(_targetTeleportPosition.x, transform.position.y, _targetTeleportPosition.z);
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+
+        // Stops teleporting when the player reaches the destination.
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            _shouldTeleport = false;
+        }
     }
 }
-/*
- * Teleport variable in projectile behaviour.
- * on mouseclick 1 shoot projectile the same as the other one
- *  Trigger shootprojectile
- *  Differentiate between the two different kinds of projectile
- *  if projectile is isTeleport
- *      Destroy the object if it is tagged as enemy
- *      Update player position to the position where the collision happened
- *      Small delay in going there so that the player isn't there instantly
- */

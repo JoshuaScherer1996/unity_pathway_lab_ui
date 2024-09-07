@@ -31,10 +31,21 @@ public class ProjectileBehaviour : MonoBehaviour
     // Destroys both projectile and enemy of they collide.
     private void OnTriggerEnter(Collider other)
     {
+        // Get the location of this collision to help the PlayerController to move the player there.
+        if (isTeleport)
+        {
+            // Notify the player to teleport to this location.
+            var playerController = FindObjectOfType<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.InitiateTeleport(transform.position);
+            }
+        }
+        
         if (other.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }
