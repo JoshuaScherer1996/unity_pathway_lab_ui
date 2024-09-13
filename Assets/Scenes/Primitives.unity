@@ -183,7 +183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 16d1a13a827d549279d5cfbfa4013de7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca18835b072544ee8a0c2a784bf5a0ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1255931756613101082, guid: 5a25f190626c7494eaa3ff63867344f1, type: 3}
+  enemyPrefab: {fileID: 7497498311461451802, guid: 0ffd3c0aad38a45cf8f739f15e2d81b0, type: 3}
 --- !u!4 &1771430513
 Transform:
   m_ObjectHideFlags: 0
@@ -678,11 +678,11 @@ PrefabInstance:
     - target: {fileID: 5896407064067977049, guid: 131993e1cbb954ef9b613b316ab0ce0e, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 8879883480900996922, guid: fecb993fb37964e0d98acd349ed73f08, type: 3}
+      objectReference: {fileID: 2124165597404012873, guid: 3dd8cb8d4362c42c2ab4496491dfd9cf, type: 3}
     - target: {fileID: 5896407064067977049, guid: 131993e1cbb954ef9b613b316ab0ce0e, type: 3}
       propertyPath: teleportProjectile
       value: 
-      objectReference: {fileID: 7359996742775844696, guid: 7a5755dde633b41bcbffd63e72326fc0, type: 3}
+      objectReference: {fileID: 2999559158114162392, guid: c48af726c156f4cbaa7e4838e616614e, type: 3}
     - target: {fileID: 8388505314224569170, guid: 131993e1cbb954ef9b613b316ab0ce0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
